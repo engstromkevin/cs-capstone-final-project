@@ -1,0 +1,38 @@
+﻿@model List<LineItem>
+@{
+    ViewBag.Title = "Shopping Cart 1";
+}
+
+@*<h2>Viewing Cart</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Product ID</th>
+            <th>Invoice Num</th>
+            <th>Quantity</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ProductID</td>
+                <td>@item.InvoiceNum</td>
+                <td>@item.Quantity</td>
+                <td>.</td>
+                <td>.</td>
+                <td>.</td>
+                <td>
+                    <a asp-controller="Home" asp-action="Cart">Remove from Cart</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a asp-controller="Home" asp-action="Index">Back to Shopping</a>
+<a asp-controller="Home" asp-action="Checkout" class="btn btn-primary">Checkout</a>*@

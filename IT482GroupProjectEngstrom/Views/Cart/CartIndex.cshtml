@@ -1,0 +1,38 @@
+﻿@model ShoppingCart
+@{
+    ViewBag.Title = "Shopping Cart";
+}
+
+<h1>Viewing Cart</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Total price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.GetCartContents())
+        {
+            <tr>
+                <td>@Model.GetContext().Product.Find(item.ProductID).ProductName</td>
+                <td>@item.Quantity</td>
+                <td>@string.Format("{0:C}", item.Price)</td>
+                @*<td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>*@
+                <td><a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-prodId="@item.ProductID" asp-route-quantity="1">Remove 1 from Cart</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<p>Total price of all items in cart is:  @string.Format("{0:C}", @Model.GetTotalPrice())</p>
+<a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Back to Shopping</a>
+@if (Model.GetCartContents().Count() > 0)
+{
+    <a asp-controller="Cart" asp-action="Checkout" class="btn btn-primary">Checkout</a>
+}

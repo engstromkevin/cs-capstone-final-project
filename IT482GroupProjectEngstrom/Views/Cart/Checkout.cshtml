@@ -1,0 +1,29 @@
+﻿@model ShoppingCart
+@{
+    ViewBag.Title = "Checkout";
+}
+
+<h2>Viewing Invoice #@Model.GetInvoice().InvoiceNum</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Total price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.GetCartContents())
+        {
+            <tr>
+                <td>@Model.GetContext().Product.Find(item.ProductID).ProductName</td>
+                <td>@item.Quantity</td>
+                <td>@string.Format("{0:C}", item.Price)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<p><b>Grand total: @string.Format("{0:C}", Model.GetTotalPrice())</b><br />
+    Thank you for shopping with us today!</p>
+<a asp-controller="Cart" asp-action="NewSession" class="btn btn-primary">Back to Shop</a>
